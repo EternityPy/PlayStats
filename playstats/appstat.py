@@ -10,6 +10,7 @@ class AppStat:
         self.tree = html.fromstring(self.content)
 
     def rating(self):
+        # Returns rating out of 5
         selector = CSSSelector('.score')
         match = self.tree.xpath(selector.path)
         rating = float(match[0].text)
@@ -55,7 +56,14 @@ class AppStat:
 
     def version(self):
         # Returns the genre that the app belongs to.
-        selector = CSSSelector('[itemprop="softwareVersion"]')
+        selector = CSSSelector('div.content[itemprop="softwareVersion"]')
         match = self.tree.xpath(selector.path)
         version = match[0].text.strip()
         return version
+
+    def android_version(self):
+        # Returns the minimum android version the app requires to run.
+        selector = CSSSelector('div.content[itemprop="operatingSystems"]')
+        match = self.tree.xpath(selector.path)
+        android_version = match[0].text.strip()
+        return android_version

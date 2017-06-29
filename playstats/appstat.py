@@ -52,3 +52,10 @@ class AppStat:
         match = self.tree.xpath(selector.path)
         genre = match[0].text
         return genre
+
+    def version(self):
+        # Returns the genre that the app belongs to.
+        selector = CSSSelector('[itemprop="softwareVersion"]')
+        match = self.tree.xpath(selector.path)
+        version = match[0].text.strip()
+        return version

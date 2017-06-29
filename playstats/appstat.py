@@ -34,14 +34,21 @@ class AppStat:
 
     def vendor(self):
         # Returns the vendor of the app.
-        selector = CSSSelector('.meta-info .content')
+        selector = CSSSelector('span[itemprop="name"]')
         match = self.tree.xpath(selector.path)
-        vendor = match[-2].text
+        vendor = match[0].text
         return vendor
 
     def last_updated(self):
         # Returns the last updated date for the app.
-        selector = CSSSelector('.meta-info .content')
+        selector = CSSSelector('div.content[itemprop="datePublished"]')
         match = self.tree.xpath(selector.path)
         last_updated = match[0].text
         return last_updated
+
+    def genre(self):
+        # Returns the genre that the app belongs to.
+        selector = CSSSelector('[itemprop="genre"]')
+        match = self.tree.xpath(selector.path)
+        genre = match[0].text
+        return genre

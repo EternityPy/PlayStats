@@ -31,3 +31,17 @@ class AppStat:
         match = self.tree.xpath(selector.path)
         total_reviews = int(match[0].text.replace(',', ''))
         return total_reviews
+
+    def vendor(self):
+        # Returns the vendor of the app.
+        selector = CSSSelector('.meta-info .content')
+        match = self.tree.xpath(selector.path)
+        vendor = match[-2].text
+        return vendor
+
+    def last_updated(self):
+        # Returns the last updated date for the app.
+        selector = CSSSelector('.meta-info .content')
+        match = self.tree.xpath(selector.path)
+        last_updated = match[0].text
+        return last_updated

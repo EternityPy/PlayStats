@@ -10,6 +10,7 @@ class AppStat:
         self.tree = html.fromstring(self.content)
 
     def rating(self):
+        # Returns rating out of 5
         selector = CSSSelector('.score')
         match = self.tree.xpath(selector.path)
         rating = float(match[0].text)

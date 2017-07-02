@@ -77,3 +77,37 @@ class AppStat:
         if len(match) == 1:
             return match[0].text.strip()
         return 'Unavailable'
+
+    def content_rating(self):
+        # Returns the content rating for the app.
+        selector = CSSSelector('div.content[itemprop="contentRating"]')
+        match = self.tree.xpath(selector.path)
+        if len(match) == 1:
+            return match[0].text.strip()
+        return 'Unavailable'
+
+    def min_downloads(self):
+        # Returns the minimum number of downloads for the app.
+        # This method is not useful enough.
+        # Actually Google Play doesn't display the actual
+        # number of downloads on the website it displays a range
+        # for eg. 100,000,000 - 500,000,000
+        selector = CSSSelector('div.content[itemprop="numDownloads"]')
+        match = self.tree.xpath(selector.path)
+        return int(match[0].text.split('-')[0].replace(',', ''))
+
+    def max_downloads(self):
+        # Returns the maximum number of downloads for the app.
+        # This method is not useful enough.
+        # Actually Google Play doesn't display the actual
+        # number of downloads on the website it displays a range
+        # for eg. 100,000,000 - 500,000,000
+        selector = CSSSelector('div.content[itemprop="numDownloads"]')
+        match = self.tree.xpath(selector.path)
+        return int(match[0].text.split('-')[1].replace(',', ''))
+
+    def title(self):
+        # Returns the title of the app as on Google Play.
+        selector = CSSSelector('.id-app-title')
+        match = self.tree.xpath(selector.path)
+        return match[0].text

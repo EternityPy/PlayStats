@@ -5,7 +5,7 @@ from lxml.cssselect import CSSSelector
 
 class AppStat:
     def __init__(self, package_name):
-        self.app_url = "https://play.google.com/store/apps/details?id=%s" % package_name
+        self.app_url = "https://play.google.com/store/apps/details?id=%s&hl=en" % package_name
         self.content = urlopen(self.app_url).read()
         self.tree = html.fromstring(self.content)
 

@@ -60,7 +60,7 @@ class AppStat:
         match = self.tree.xpath(selector.path)
         if len(match) == 1:
             return match[0].text.strip()
-        return 'Unavailable'
+        return None
 
     def android_version(self):
         # Returns the minimum android version the app requires to run.
@@ -68,7 +68,7 @@ class AppStat:
         match = self.tree.xpath(selector.path)
         if len(match) == 1:
             return match[0].text.strip()
-        return 'Unavailable'
+        return None
 
     def size(self):
         # Returns the size of the app.
@@ -76,7 +76,7 @@ class AppStat:
         match = self.tree.xpath(selector.path)
         if len(match) == 1:
             return match[0].text.strip()
-        return 'Unavailable'
+        return None
 
     def content_rating(self):
         # Returns the content rating for the app.
@@ -84,7 +84,7 @@ class AppStat:
         match = self.tree.xpath(selector.path)
         if len(match) == 1:
             return match[0].text.strip()
-        return 'Unavailable'
+        return None
 
     def min_downloads(self):
         # Returns the minimum number of downloads for the app.

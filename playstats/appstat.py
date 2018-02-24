@@ -118,6 +118,7 @@ class AppStat:
         # Useful for playstore search optimisation.
         # The rank is based on the search in the playstore website.
         # Rank maybe off by 1 or 2 due to playstore advertisement.
+        # 0 means search didn't contain the app for the first 100 results
         search_string = search.replace(' ', '%20')
         url = 'https://play.google.com/store/search?q=' + search_string + '&c=apps&hl=en'
         result = urlopen(url).read()
@@ -125,7 +126,7 @@ class AppStat:
         match = result_tree.xpath('//@data-docid')
         i = 1
         rank = 1
-        while(i < 400):
+        while(i < 500):
             if match[i] == self.package_name:
                 return rank
             else:

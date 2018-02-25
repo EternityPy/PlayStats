@@ -8,6 +8,7 @@ class AppStat:
         self.app_url = "https://play.google.com/store/apps/details?id=%s&hl=en" % package_name
         self.content = urlopen(self.app_url).read()
         self.tree = html.fromstring(self.content)
+        self.package_name = package_name
 
     def rating(self):
         # Returns rating out of 5
@@ -111,3 +112,27 @@ class AppStat:
         selector = CSSSelector('.id-app-title')
         match = self.tree.xpath(selector.path)
         return match[0].text
+        
+    def keyword_rank(self, search):
+        # Returns the rank of the app on searching the passed keyword.
+        # Useful for playstore search optimisation.
+        # The rank is based on the search in the playstore website.
+        # Rank maybe off by 1 or 2 due to playstore advertisement.
+        # 0 means search didn't contain the app for the first 100 results
+        search_string = search.replace(' ', '%20')
+        url = 'https://play.google.com/store/search?q=' + search_string + '&c=apps&hl=en'
+        result = urlopen(url).read()
+        result_tree = html.fromstring(result)
+        match = result_tree.xpath('//@data-docid')
+        i = 1
+        rank = 1
+        try:
+            while(i < 500):
+                if match[i] == self.package_name:
+                    return rank
+                else:
+                    i = i + 5
+                    rank = rank + 1
+        except:
+            return 0
+        return 0

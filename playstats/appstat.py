@@ -126,10 +126,13 @@ class AppStat:
         match = result_tree.xpath('//@data-docid')
         i = 1
         rank = 1
-        while(i < 500):
-            if match[i] == self.package_name:
-                return rank
-            else:
-                i = i + 5
-                rank = rank + 1
+        try:
+            while(i < 500):
+                if match[i] == self.package_name:
+                    return rank
+                else:
+                    i = i + 5
+                    rank = rank + 1
+        except:
+            return 0
         return 0

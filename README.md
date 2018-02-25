@@ -31,6 +31,8 @@ pip install playstats
 'Varies with device'
 >>> app.content_rating()
 'Rated for 3+'
+>>> app.keyword_rank('whats app instant messenger')
+2
 ```
 
 
